@@ -1,4 +1,4 @@
-package com.raka.spacex.ui.theme
+package com.raka.audiorecorder.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
