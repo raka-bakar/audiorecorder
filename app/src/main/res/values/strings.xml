@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Audio Recorder</string>
+    <string name="title">Recording List</string>
+    <string name="lbl_data_empty">No Audio Recordings Found</string>
+    <string name="lbl_error">No Audio Recordings Found</string>
+    <string name="desc_img">Image</string>
+    <string name="name_format">Audio Recording %1$d</string>
+    <string name="duration_format">Duration %1$s</string>
+    <string name="recording_warning">Please stop the recording first</string>
+    <string name="permission_warning">Please accept the Audio Recording permission</string>
 </resources>
