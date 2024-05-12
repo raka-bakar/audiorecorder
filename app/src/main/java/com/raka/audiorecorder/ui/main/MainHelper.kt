@@ -6,7 +6,7 @@ import java.util.Date
 import javax.inject.Inject
 
 /**
- * class that provides helper functions for Main View Model
+ * class that provides helper functions for MainViewModel
  */
 interface MainHelper {
     /**

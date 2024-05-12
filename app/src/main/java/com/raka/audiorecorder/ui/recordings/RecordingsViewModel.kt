@@ -17,7 +17,8 @@ import javax.inject.Inject
 @HiltViewModel
 class RecordingsViewModel @Inject constructor(
     private val audioRecordRepository: AudioRecordRepository,
-    private val audioPlayer: AudioPlayer
+    private val audioPlayer: AudioPlayer,
+    private val recordingsHelper: RecordingsHelper
 ) : ViewModel() {
 
     val recordingList = RefreshFlow {
@@ -25,14 +26,12 @@ class RecordingsViewModel @Inject constructor(
             .stateIn(viewModelScope, SharingStarted.Eagerly, CallState.loading())
     }
 
-    private var isPlaying = false
-
     /**
      * Handling item clicked and check if there is an audio is being played
      * @param item of type AudioRecord
      */
     fun onItemClicked(item: AudioRecord) {
-        if (isPlaying) {
+        if (recordingsHelper.isSameAudio(item.filename)) {
             stopAudio()
         } else {
             playAudio(directoryPath = item.filepath, fileName = item.filename)
@@ -47,7 +46,7 @@ class RecordingsViewModel @Inject constructor(
      */
     private fun playAudio(directoryPath: String, fileName: String) {
         audioPlayer.stop()
-        isPlaying = true
+        recordingsHelper.currentFile = fileName
         audioPlayer.playAudioFile(directoryPath = directoryPath, fileName = fileName)
     }
 
@@ -56,7 +55,7 @@ class RecordingsViewModel @Inject constructor(
      * then set status isPlaying, then call audioPlayer
      */
     fun stopAudio() {
-        isPlaying = false
+        recordingsHelper.currentFile = ""
         audioPlayer.stop()
     }
 

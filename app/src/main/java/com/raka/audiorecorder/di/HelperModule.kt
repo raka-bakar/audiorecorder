@@ -4,6 +4,8 @@ import com.raka.audiorecorder.domain.timer.TimerHelper
 import com.raka.audiorecorder.domain.timer.TimerHelperImpl
 import com.raka.audiorecorder.ui.main.MainHelper
 import com.raka.audiorecorder.ui.main.MainHelperImpl
+import com.raka.audiorecorder.ui.recordings.RecordingsHelper
+import com.raka.audiorecorder.ui.recordings.RecordingsHelperImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -34,4 +36,13 @@ abstract class HelperModule {
     @Singleton
     abstract fun provideMainHelper(impl: MainHelperImpl)
             : MainHelper
+
+    /**
+     * provides RecordingsHelper
+     * @param impl of RecordingsHelperImpl type
+     */
+    @Binds
+    @Singleton
+    abstract fun provideRecordingsHelper(impl: RecordingsHelperImpl)
+            : RecordingsHelper
 }
