@@ -7,7 +7,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.colorResource
 import com.raka.audiorecorder.R
-import com.raka.audiorecorder.data.database.AudioRecord
 
 @Composable
 fun AlertDialogView(

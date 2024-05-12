@@ -16,7 +16,7 @@ interface AudioPlayer {
      *  @param directoryPath directory path of the file, type String
      *  @param fileName of the file, type String
      */
-    fun playAudioFile(directoryPath:String, fileName: String)
+    fun playAudioFile(directoryPath: String, fileName: String)
 
     /**
      *  stop the audio file
@@ -28,8 +28,8 @@ class AudioPlayerImpl @Inject constructor(private val context: Context) : AudioP
 
     private var player: MediaPlayer? = null
 
-    override fun playAudioFile(directoryPath:String, fileName: String) {
-        val file = File(directoryPath,fileName)
+    override fun playAudioFile(directoryPath: String, fileName: String) {
+        val file = File(directoryPath, fileName)
         MediaPlayer.create(context, file.toUri()).apply {
             player = this
             start()

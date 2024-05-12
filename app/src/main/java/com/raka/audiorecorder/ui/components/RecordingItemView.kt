@@ -35,9 +35,9 @@ fun RecordingItemView(
     onItemClick: (AudioRecord) -> Unit,
     onDeleteClick: (AudioRecord) -> Unit
 ) {
-
-    val openDialog = remember { mutableStateOf(false)  }
+    val openDialog = remember { mutableStateOf(false) }
     val fileName = stringResource(id = R.string.name_format, item.id)
+
     ConstraintLayout(
         modifier = Modifier
             .padding(dimensionResource(id = R.dimen.padding_medium_large))
@@ -45,6 +45,7 @@ fun RecordingItemView(
             .clickable { onItemClick(item) }
     ) {
         val (imageRef, nameRef, countryRef) = createRefs()
+        // Text to display the filename
         Text(
             text = fileName,
             fontWeight = FontWeight.Bold,
@@ -62,8 +63,9 @@ fun RecordingItemView(
                     start = dimensionResource(id = R.dimen.padding_small)
                 )
         )
+        // Text to display the duration of the recording
         Text(
-            text =  stringResource(id = R.string.duration_format, item.duration),
+            text = stringResource(id = R.string.duration_format, item.duration),
             color = Color.Gray,
             modifier = Modifier
                 .constrainAs(countryRef) {
@@ -75,6 +77,7 @@ fun RecordingItemView(
                     start = dimensionResource(id = R.dimen.padding_small)
                 )
         )
+        // Button delete
         Image(painter = painterResource(id = R.drawable.ic_delete),
             contentDescription = stringResource(
                 id = R.string.desc_img
@@ -88,12 +91,15 @@ fun RecordingItemView(
                 }
                 .clickable { openDialog.value = true }
         )
-        if (openDialog.value){
-            AlertDialogView(onConfirmClicked = {onDeleteClick(item)},
+        // Showing alert dialog when button delete is pressed
+        if (openDialog.value) {
+            AlertDialogView(
+                onConfirmClicked = { onDeleteClick(item) },
                 dismissLabel = stringResource(id = R.string.lbl_negative),
                 description = stringResource(id = R.string.delete_description_format, fileName),
                 confirmLabel = stringResource(id = R.string.lbl_positive),
-                title = stringResource(id = R.string.lbl_warning)) {
+                title = stringResource(id = R.string.lbl_warning)
+            ) {
                 openDialog.value = false
             }
         }

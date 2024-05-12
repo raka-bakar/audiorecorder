@@ -31,6 +31,7 @@ class MainActivity : ComponentActivity() {
                         startDestination = MainNavigation.Main.route,
                         route = MainNavigation.Main.graphId
                     ) {
+                        // all screens listed in the Main Navigation will be navigated here
                         MainNavigation.getAllNavigation().forEach {
                             it.compose(navController)
                         }

@@ -1,8 +1,6 @@
 package com.raka.audiorecorder.di
 
 import com.raka.audiorecorder.domain.timer.Timer
-import com.raka.audiorecorder.domain.timer.TimerHelper
-import com.raka.audiorecorder.domain.timer.TimerHelperImpl
 import com.raka.audiorecorder.domain.timer.TimerImpl
 import dagger.Binds
 import dagger.Module
@@ -24,5 +22,4 @@ abstract class TimerModule {
     @Singleton
     abstract fun provideTimer(impl: TimerImpl)
             : Timer
-
 }

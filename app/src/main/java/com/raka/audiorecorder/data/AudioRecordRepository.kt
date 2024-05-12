@@ -18,7 +18,9 @@ interface AudioRecordRepository {
 
     /**
      * add a new Audio Record to the database
-     * @param audioRecord of AudioRecord type
+     * @param fileName of String type
+     * @param duration of String type
+     * @param filePath of String type
      */
     suspend fun addAudioRecord(
         fileName: String,

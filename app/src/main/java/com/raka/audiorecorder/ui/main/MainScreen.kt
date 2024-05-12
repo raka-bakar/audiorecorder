@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -79,7 +80,7 @@ fun MainScreen(
             modifier = Modifier.constrainAs(tickerRef) {
                 centerVerticallyTo(parent)
                 centerHorizontallyTo(parent)
-            }
+            }.testTag("tickerTag")
         )
 
         // Play or Stop button
@@ -116,7 +117,7 @@ fun MainScreen(
                     start.linkTo(parent.start)
                     end.linkTo(parent.end)
                     bottom.linkTo(parent.bottom)
-                },
+                }.testTag("playButtonTag"),
             colors = IconButtonColors(
                 containerColor = Color.Red, disabledContainerColor = Color.Gray,
                 contentColor = Color.Black, disabledContentColor = Color.Gray
@@ -150,7 +151,7 @@ fun MainScreen(
                 .constrainAs(recordingsButtonRef) {
                     start.linkTo(playButtonRef.end)
                     bottom.linkTo(parent.bottom)
-                }
+                }.testTag("recordingButtonTag")
         ) {
             Icon(
                 painterResource(id = R.drawable.ic_menu),

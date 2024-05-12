@@ -24,6 +24,7 @@ sealed class MainNavigation(override val route: String) : Navigation(route = rou
     companion object {
         /**
          * get all destinations on this graph
+         * all screens are listed here
          */
         fun getAllNavigation() = setOf(Main, Recordings)
     }

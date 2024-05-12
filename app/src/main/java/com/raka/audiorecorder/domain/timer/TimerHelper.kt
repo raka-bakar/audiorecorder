@@ -30,7 +30,7 @@ class TimerHelperImpl @Inject constructor() : TimerHelper {
         return formatted
     }
 
-    companion object{
+    companion object {
         private const val TWO_DIGITS_FORMATTER = 10
     }
 }

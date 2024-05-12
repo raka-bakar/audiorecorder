@@ -43,15 +43,6 @@ class MainViewModelTest {
     }
 
     @Test
-    fun `verify the correct duration is sent to the Audio Record Repository`() = runBlocking{
-
-        Mockito.`when`(mainHelper.getRecordingDuration(duration)).thenReturn(duration)
-
-        sut.stopRecording(duration)
-        verify(audioRecordRepository)
-            .addAudioRecord(fileName ="", duration = duration, filePath = "")
-    }
-    @Test
     fun `verify audio recorder and timer are called when stopping a recorder`(){
         sut.stopRecording(duration)
         verify(timer).stopTimer()

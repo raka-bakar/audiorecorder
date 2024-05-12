@@ -63,7 +63,8 @@ fun RecordingsScreen(
 
             },
             colors = TopAppBarDefaults
-                .topAppBarColors(containerColor = colorResource(id = R.color.teal_200))
+                .topAppBarColors(containerColor = colorResource(id = R.color.teal_200)),
+            modifier = Modifier.testTag("RecordingTitleTag")
         )
         // Handling each status of call state
         when (callState.status) {

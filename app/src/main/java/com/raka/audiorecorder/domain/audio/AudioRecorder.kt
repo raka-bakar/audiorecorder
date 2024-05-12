@@ -23,7 +23,6 @@ interface AudioRecorder {
      * stop the audio recording process
      */
     fun stop()
-
 }
 
 class AudioRecorderImpl @Inject constructor(private val context: Context) : AudioRecorder {
