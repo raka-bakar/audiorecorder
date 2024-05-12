@@ -8,4 +8,8 @@
     <string name="duration_format">Duration %1$s</string>
     <string name="recording_warning">Please stop the recording first</string>
     <string name="permission_warning">Please accept the Audio Recording permission</string>
+    <string name="lbl_warning">Warning!</string>
+    <string name="lbl_negative">No</string>
+    <string name="lbl_positive">Yes</string>
+    <string name="delete_description_format">Are you sure you want to remove %1$s?</string>
 </resources>

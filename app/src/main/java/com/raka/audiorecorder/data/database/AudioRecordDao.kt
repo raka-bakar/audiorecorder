@@ -5,6 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import kotlinx.coroutines.flow.Flow
 
 /**
  * Room Dao interface, provides methods for persisting Audio Record
@@ -17,7 +18,7 @@ interface AudioRecordDao {
      * @return List<AudioRecord>
      */
     @Query("SELECT * FROM audio_records")
-    suspend fun getAudioRecords(): List<AudioRecord>
+    fun getAudioRecords(): Flow<List<AudioRecord>>
 
     /**
      * add a new AudioRecord to the database

@@ -8,6 +8,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
@@ -33,15 +35,18 @@ fun RecordingItemView(
     onItemClick: (AudioRecord) -> Unit,
     onDeleteClick: (AudioRecord) -> Unit
 ) {
+
+    val openDialog = remember { mutableStateOf(false)  }
+    val fileName = stringResource(id = R.string.name_format, item.id)
     ConstraintLayout(
         modifier = Modifier
-            .padding(10.dp)
+            .padding(dimensionResource(id = R.dimen.padding_medium_large))
             .fillMaxSize()
             .clickable { onItemClick(item) }
     ) {
         val (imageRef, nameRef, countryRef) = createRefs()
         Text(
-            text = stringResource(id = R.string.name_format, item.id),
+            text = fileName,
             fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Start,
             style = MaterialTheme.typography.titleMedium,
@@ -81,7 +86,16 @@ fun RecordingItemView(
                     top.linkTo(parent.top)
                     bottom.linkTo(parent.bottom)
                 }
-                .clickable { onDeleteClick(item) }
+                .clickable { openDialog.value = true }
         )
+        if (openDialog.value){
+            AlertDialogView(onConfirmClicked = {onDeleteClick(item)},
+                dismissLabel = stringResource(id = R.string.lbl_negative),
+                description = stringResource(id = R.string.delete_description_format, fileName),
+                confirmLabel = stringResource(id = R.string.lbl_positive),
+                title = stringResource(id = R.string.lbl_warning)) {
+                openDialog.value = false
+            }
+        }
     }
 }

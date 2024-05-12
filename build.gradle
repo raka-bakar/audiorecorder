@@ -3,7 +3,6 @@ buildscript {
         compose_version = '1.5.2'
     }
     dependencies {
-        classpath 'io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.22.0'
         classpath 'org.jetbrains.kotlin:kotlin-serialization:1.9.0'
         classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.0'
     }
@@ -15,17 +14,6 @@ plugins {
     id 'com.android.library' version '8.4.0' apply false
     id 'org.jetbrains.kotlin.android' version '1.6.21' apply false
     id 'com.google.dagger.hilt.android' version '2.49' apply false
-    id 'io.gitlab.arturbosch.detekt' version '1.22.0'
-}
-
-subprojects {
-    apply plugin: 'io.gitlab.arturbosch.detekt'
-
-    detekt {
-        config = files("${project.rootDir}/detekt_config.yml")
-        parallel = true
-        autoCorrect = true
-    }
 }
 
 task clean(type: Delete) {

@@ -30,7 +30,10 @@ interface Timer {
     fun stopTimer()
 }
 
-class TimerImpl @Inject constructor(private val scope: CoroutineScope) : Timer {
+class TimerImpl @Inject constructor(
+    private val scope: CoroutineScope,
+    private val timerHelper: TimerHelper
+) : Timer {
     private var job: Job? = null
     private val mutableTicker = MutableStateFlow(START_VALUE)
     override val ticker: StateFlow<String> = mutableTicker
@@ -41,7 +44,6 @@ class TimerImpl @Inject constructor(private val scope: CoroutineScope) : Timer {
     override fun startTimer() {
         startJob()
     }
-
 
     override fun stopTimer() {
         stopJob()
@@ -55,7 +57,7 @@ class TimerImpl @Inject constructor(private val scope: CoroutineScope) : Timer {
         job = scope.launch {
             while (isActive) {
                 duration += delay
-                mutableTicker.value = formatTime(duration)
+                mutableTicker.value = timerHelper.formatTime(duration)
                 delay(DELAY_DURATION)
             }
         }
@@ -77,25 +79,8 @@ class TimerImpl @Inject constructor(private val scope: CoroutineScope) : Timer {
         mutableTicker.value = START_VALUE
     }
 
-    /**
-     * formatting duration into hour
-     */
-    private fun formatTime(value: Long): String {
-        val millis = value % 1000
-        val seconds = (value / 1000) % 60
-        val minutes = (value / (1000 * 60)) % 60
-        val hours = (value / (1000 * 60 * 60))
-
-        val formatted = if (hours > 0)
-            "%02d:%02d:%02d.%02d".format(hours, minutes, seconds, millis / TWO_DIGITS_FORMATTER)
-        else
-            "%02d:%02d:%02d".format(minutes, seconds, millis / TWO_DIGITS_FORMATTER)
-        return formatted
-    }
-
     companion object {
         private const val DELAY_DURATION = 100L
-        private const val TWO_DIGITS_FORMATTER = 10
         private const val START_VALUE = "00:00:00"
     }
 }

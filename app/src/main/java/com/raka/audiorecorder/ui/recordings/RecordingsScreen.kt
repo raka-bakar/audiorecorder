@@ -114,7 +114,7 @@ private fun RecordingListView(
                 onItemClick = onItemClicked,
                 onDeleteClick = onDeleteClicked
             )
-                HorizontalDivider(thickness = 1.dp, color = Color.Gray)
+            HorizontalDivider(thickness = 1.dp, color = Color.Gray)
         }
     }
 }

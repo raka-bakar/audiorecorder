@@ -2,9 +2,7 @@ package com.raka.audiorecorder.data
 
 import com.raka.audiorecorder.data.database.AudioRecord
 import com.raka.audiorecorder.data.database.AudioRecordDao
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
 import timber.log.Timber
 import java.io.File
 import javax.inject.Inject
@@ -24,27 +22,25 @@ interface DataSource {
      * add a new DBAudioRecord to the database
      * @param audioRecord of DBAudioRecord type
      */
-    suspend fun addAudioRecord(audioRecord:AudioRecord)
+    suspend fun addAudioRecord(audioRecord: AudioRecord)
 
     /**
      * delete an AudioRecord from database
      * @param audioRecord of AudioRecord type
      */
-    suspend fun deleteAudioRecord(audioRecord:AudioRecord)
+    suspend fun deleteAudioRecord(audioRecord: AudioRecord)
 
     /**
      * delete a recording audio file from local storage
      * @param audioRecord of AudioRecord type
+     * @return Boolean type when deleting file is succeed or not
      */
-    suspend fun deleteFileAudioRecord(audioRecord:AudioRecord)
+    suspend fun deleteFileAudioRecord(audioRecord: AudioRecord)
 }
 
-class DataSourceImpl @Inject constructor(private val audioRecordDao: AudioRecordDao): DataSource{
-    override fun getAudioRecords(): Flow<List<AudioRecord>> = flow {
-        coroutineScope {
-            emit(audioRecordDao.getAudioRecords())
-        }
-    }
+class DataSourceImpl @Inject constructor(private val audioRecordDao: AudioRecordDao) : DataSource {
+    override fun getAudioRecords(): Flow<List<AudioRecord>> =
+        audioRecordDao.getAudioRecords()
 
     override suspend fun addAudioRecord(audioRecord: AudioRecord) {
         audioRecordDao.addAudioRecord(item = audioRecord)
@@ -57,10 +53,9 @@ class DataSourceImpl @Inject constructor(private val audioRecordDao: AudioRecord
     override suspend fun deleteFileAudioRecord(audioRecord: AudioRecord) {
         val file = File(audioRecord.filepath, audioRecord.filename)
         try {
-            if (file.exists()){
+            if (file.exists())
                 file.delete()
-            }
-        }catch (e: Exception){
+        } catch (e: Exception) {
             Timber.e(e)
         }
     }

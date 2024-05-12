@@ -20,7 +20,11 @@ interface AudioRecordRepository {
      * add a new Audio Record to the database
      * @param audioRecord of AudioRecord type
      */
-    suspend fun addAudioRecord(audioRecord: AudioRecord)
+    suspend fun addAudioRecord(
+        fileName: String,
+        duration: String,
+        filePath: String
+    )
 
     /**
      * delete an Audio Record from database
@@ -41,8 +45,17 @@ class AudioRecordRepositoryImpl @Inject constructor(private val dataSource: Data
         }
     }
 
-    override suspend fun addAudioRecord(audioRecord: AudioRecord) {
-        dataSource.addAudioRecord(audioRecord = audioRecord)
+    override suspend fun addAudioRecord(
+        fileName: String,
+        duration: String,
+        filePath: String
+    ) {
+        dataSource.addAudioRecord(
+            audioRecord = AudioRecord(
+                filename = fileName,
+                duration = duration, filepath = filePath
+            )
+        )
     }
 
     override suspend fun deleteAudioRecord(audioRecord: AudioRecord) {

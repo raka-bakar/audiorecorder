@@ -82,16 +82,17 @@ fun MainScreen(
             }
         )
 
-        // Play/Stop button
+        // Play or Stop button
         OutlinedIconButton(
             onClick = {
                 /**
                  * Asking for permission to the user
                  */
-                when(PackageManager.PERMISSION_GRANTED){
-                    ContextCompat.checkSelfPermission(context,
+                when (PackageManager.PERMISSION_GRANTED) {
+                    ContextCompat.checkSelfPermission(
+                        context,
                         Manifest.permission.RECORD_AUDIO
-                    )-> {
+                    ) -> {
                         // when permission is granted
                         if (!isRecording) {
                             isRecording = true
@@ -101,6 +102,7 @@ fun MainScreen(
                             onStopClicked(ticker)
                         }
                     }
+
                     else -> {
                         // when permission is not granted
                         launcher.launch(Manifest.permission.RECORD_AUDIO)
